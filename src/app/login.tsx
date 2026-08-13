@@ -10,7 +10,7 @@ export default function Login(){
 
             <TouchableOpacity onPress={() => router.push("/register")}>
                 <Text
-                    className="text-purple-base"
+                    className="text-black"
                 >Go to Register</Text>
             </TouchableOpacity>
         </View>
