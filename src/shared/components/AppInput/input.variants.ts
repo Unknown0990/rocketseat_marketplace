@@ -10,13 +10,24 @@ export const inputVariants = tv({
     },
     variants: {
         isFocused: {
-            true: {}
+            true: {
+                wrapper: "border-purple-base",
+                label: "text-purple-base"
+            }
         },
         isError: {
-            true: {}
+            true: {
+                wrapper: "border-danger",
+                label: "text-danger",
+                wrapper: "opacity-50",
+                input: "text-gray-300"
+            }
         },
         isDisabled: {
-            true: {}
+            true: {
+                wrapper: "opacity-50",
+                input: "text-gray-300"
+            }
         },
     },
     defaultVariants: {

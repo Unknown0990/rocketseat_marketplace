@@ -7,9 +7,3 @@ export interface RegisterHTTPParams{
   phone: string;
   password: string;
 }
-
-export interface RegisterHTTPResponse{
-  token: string;
-  refreshToken: string;
-  user: UserInterface;
-}

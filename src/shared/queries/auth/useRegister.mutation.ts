@@ -6,7 +6,7 @@ export const useRegisterMutation = () => {
     const mutation = useMutation({
         mutationFn
         : (userData: RegisterHTTPParams) => authService.register(userData),
-        onSuccess: (response) => console.log(),
+        onSuccess: (response) => console.log(response),
         onError: (error) => console.log(error),
     })
 

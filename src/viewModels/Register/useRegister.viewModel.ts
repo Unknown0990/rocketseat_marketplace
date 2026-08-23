@@ -16,7 +16,7 @@ export const useRegisterViewModel = () => {
             email: "devX2@gmail.com",
             password: "12345678",
             confirmPassword: "12345678",
-            phone: "999376916"
+            phone: "999376916",
         }
     })
 
@@ -32,8 +32,6 @@ export const useRegisterViewModel = () => {
         })
     })
     
-    console.log(user)
-
     return {
         control,
         errors,
