@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from 'axios'
 import { Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const getBaseURL = () => {
     return Platform.select({
@@ -8,7 +9,7 @@ const getBaseURL = () => {
     })
 }
 
-const baseURL = getBaseURL()
+export const baseURL = getBaseURL()
 
 export class MarketplaceAPIClient{
     private instance: AxiosInstance;
@@ -18,10 +19,32 @@ export class MarketplaceAPIClient{
         this.instance = axios.create({
             baseURL,
         })
+
+        this.setUpInterceptors()
     }
 
     getInstance(){
         return this.instance;
+    }
+
+    private setUpInterceptors(){
+        this.instance.interceptors.request.use(async (config) => {
+            const userData = await AsyncStorage.getItem("marketplace-auth");
+
+            console.log(userData)
+            
+            if(userData){
+                const { state: { token } } = JSON.parse(userData)
+
+                if(token){
+                    config.headers.Authorization = `Bearer ${token}`
+                }
+            }
+
+            return config
+        }, (error) => {
+            return Promise.reject(error)
+        })
     }
 }
 

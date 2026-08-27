@@ -20,11 +20,23 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.itsdevx.marketplacerocketseatmobile"
+      "package": "com.itsdevx.marketplacerocketseatmobile",
+      "permissions": [
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.CAMERA"
+      ]
     },
     "plugins": [
       "expo-router",
-      "expo-font"
+      "expo-font",
+      [
+        "expo-image-picker",
+        {
+          "photospermission": "This app needs your access to your gallery",
+          "cameraPermission": "This app needs your access to your camera to execute es"
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

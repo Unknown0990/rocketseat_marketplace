@@ -20,7 +20,7 @@ export const AuthFormHeader: FC<AuthFormHeaderProps> = ({ title, subtitle }) => 
             >{title}</Text>
 
             <Text
-                className="text-base text-gray-300"
+                className="text-base text-gray-300 text-center"
             >{subtitle}</Text>
         </View>
     )
