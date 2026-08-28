@@ -36,6 +36,7 @@ export class MarketplaceAPIClient{
             if(userData){
                 const { state: { token } } = JSON.parse(userData)
 
+                console.log(token)
                 if(token){
                     config.headers.Authorization = `Bearer ${token}`
                 }

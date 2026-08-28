@@ -29,9 +29,9 @@ export const useUserStore = create<UserStore>()(persist((set) => ({
     token: null,
     refreshToken: null,
 
-    setSession: (sessionData) => {set({ ...sessionData })},
+    setSession: (sessionData) => set({ ...sessionData }),
     logout: () => set({ user: null, token: null, refreshToken: null }),
-    updateTokens: (updateTokensData) => {set({ ...updateTokensData })},
+    updateTokens: (updateTokensData) => set({ ...updateTokensData }),
 }), {
     name: "marketplace-auth",
     storage: createJSONStorage(() => AsyncStorage)
