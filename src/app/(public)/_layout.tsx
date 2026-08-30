@@ -3,10 +3,10 @@ import '../../styles/global.css'
 import { QueryClient } from '@tanstack/react-query'
 import { useUserStore } from "@/shared/store/user-store"
 
-export default function PrivateLayout(){
+export default function PublicLayout(){
     const { user, token } = useUserStore()
 
-    if(!user || !token) return <Redirect href="/(public)/login" />
+    if(user && token) return <Redirect href="/(private)/home" />
 
     return(
         <Stack
@@ -14,7 +14,6 @@ export default function PrivateLayout(){
                 headerShown: false
             }}
         >
-            <Stack.Screen name="(tabs)"/>
         </Stack>
     )
 }

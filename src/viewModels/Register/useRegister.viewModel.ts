@@ -10,12 +10,12 @@ import { useImage } from '@/shared/hooks/useImage';
 import { Alert } from 'react-native';
 import { useState } from 'react';
 import { CameraType } from 'expo-image-picker';
+import { useUploadAvatarMutation } from '@/shared/queries/auth/use-upload-avatar.mutation';
 
 export const useRegisterViewModel = () => {
-    const userRegisterMutation = useRegisterMutation()
     const [avatarURI, setAvatarURI] = useState<string | null>(null)
 
-    const { setSession } = useUserStore()
+    const { updateUser } = useUserStore()
 
     const { handleSelectImage } = useImage({
         callback: setAvatarURI,
@@ -37,16 +37,24 @@ export const useRegisterViewModel = () => {
         }
     })
 
+    const uploadAvatarMutation = useUploadAvatarMutation()
+
+    const userRegisterMutation = useRegisterMutation({
+        onSuccess: async () => {
+            if(avatarURI){
+                const { url } = await uploadAvatarMutation.mutateAsync(avatarURI)
+
+                console.log({ url })
+
+                updateUser({ avatarUrl: url })
+            }
+        }
+    })
+
     const onSubmit = handleSubmit(async (userData) => {
         const { confirmPassword, ...registerData } = userData
 
-        const mutationResponse = await userRegisterMutation.mutateAsync(registerData)
-
-        setSession({
-            user: mutationResponse.user,
-            token: mutationResponse.token,
-            refreshToken: mutationResponse.refreshToken,
-        })
+        await userRegisterMutation.mutateAsync(registerData)
     })
     
     return {

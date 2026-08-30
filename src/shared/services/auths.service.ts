@@ -17,7 +17,7 @@ export const login = async (userData: LoginHTTPParams) => {
     return data
 }
 
-export const updloadAvatar = async (avatarURI: string) => {
+export const uploadAvatar = async (avatarURI: string) => {
     const formData = new FormData();
 
     formData.append("avatar", {

@@ -51,7 +51,7 @@ export const LoginView: FC<ReturnType<typeof useLoginViewModel>> = ({
                     <AppButton
                         rightIcon="arrow-forward"
                         variant="outline"
-                        onPress={() => router.push("/register")}
+                        onPress={() => router.push("/(public)/register")}
                     >Register</AppButton>
                 </View>
             </View>
