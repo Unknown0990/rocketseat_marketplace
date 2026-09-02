@@ -1,0 +1,34 @@
+import { FC } from "react"
+import { Image, Text, TouchableOpacity, View } from "react-native"
+import { useProductCardViewModel } from "./useProductCard.viewModel"
+import { Ionicons } from "@expo/vector-icons"
+import { colors } from "@/styles/colors"
+
+export const ProductCardView: FC<ReturnType<typeof useProductCardViewModel>> = ({ product }) => {
+    return(
+        <TouchableOpacity className="w-[48%] my-1 rounded-xl shadow-sm overflow-hidden height-[157px] p-[4px] bg-white mb-2">
+            <View>
+                <Image
+                    source={{ uri: `${product.photo}` }}
+                    className="w-full h-[96px] rounded-[6px]"
+                    resizeMode="cover"
+                />
+
+                <View className="absolute top-0 right-0 flex-row items-center px-2 py-1 rounded-b-lg rounded-r-none bg-white">
+                    <Ionicons name='star' size={12} color={colors["blue-base"]} />
+
+                    <Text className="text-sm font-semibold ml-1">{product.ratingCount}</Text>
+                </View>
+            </View>
+
+            <View className="p-3">
+                <Text className="text-xl font-semibold mb-1" numberOfLines={2}>{product.name}</Text>
+
+                <View>
+                    <Text className="flex-row items-center justify-between">R$ {product.value}</Text>
+                </View>
+            </View>
+
+        </TouchableOpacity>
+    )
+}

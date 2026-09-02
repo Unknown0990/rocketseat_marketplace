@@ -2,6 +2,7 @@ import { useUserStore } from "@/shared/store/user-store"
 import { colors } from "@/styles/colors"
 import { Ionicons } from "@expo/vector-icons"
 import { Image, Text, TouchableOpacity, View } from "react-native"
+import { SearchInput } from "../SearchInput"
 
 export const HomeHeader = () => {
     const { user } = useUserStore()
@@ -29,7 +30,7 @@ export const HomeHeader = () => {
                 </View>
 
                 <View>
-                    <Text>Hello, {user?.name.split(" ")[0] || "User"}</Text>
+                    <Text className="font-bold text-base">Hello, {user?.name.split(" ")[0] || "User"}</Text>
 
                     <View className="flex-row items-center gap-2">
                         <Text
@@ -42,7 +43,6 @@ export const HomeHeader = () => {
                             size={20}
                         />
                     </View>
-
                 </View>
             </TouchableOpacity>
         </View>
