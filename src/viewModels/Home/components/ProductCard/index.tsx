@@ -11,5 +11,5 @@ interface ProductCardParams{
 export const ProductCard: FC<ProductCardParams> = (props) => {
     const viewModel = useProductCardViewModel(props)
 
-    return <ProductCardView {...props} />
+    return <ProductCardView {...viewModel} />
 }
