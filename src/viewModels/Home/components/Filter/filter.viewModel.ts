@@ -1,10 +1,15 @@
+import { useDebounce } from "@/shared/hooks/useDebounce"
 import { useGetProductCategoriesQuery } from "@/shared/queries/product/use-get-product-categories"
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
 import { useFilterStore } from "@/shared/store/use-filter-store"
+import { useState } from "react"
 
 export const useFilterViewModel = () => {
     const { data: categories, isLoading } = useGetProductCategoriesQuery()
 
-    const { updateFilter, filterState } = useFilterStore()
+    const { updateFilter, filterState, applyFilter, resetFilter } = useFilterStore()
+
+    const { close } = useBottomSheetStore()
 
     const handleMaxValueUpdate = (value: number) => {
         updateFilter({ key: 'maxValue', value })
@@ -25,12 +30,24 @@ export const useFilterViewModel = () => {
         }
     }
 
+    const handleApplyFilter = () => {
+        applyFilter();
+        close();
+    }
+
+    const handleResetFilter = () => {
+        resetFilter()
+        close()
+    }
+
     return{
         categories, 
         isLoading,
         handleMaxValueUpdate,
         handleMinValueUpdate,
         handleCategoryToggle,
-        selectedCategories: filterState.selectedCategories
+        selectedCategories: filterState.selectedCategories,
+        handleApplyFilter,
+        handleResetFilter
     }
 }

@@ -4,12 +4,12 @@ export interface GetProductsRequest{
     perPage: number;
   },
   filters?: {
-    from: Date;
-    to: Date;
+    from?: Date;
+    to?: Date;
     categoryIds: number[],
     searchText?: string,
-    minValue: number,
-    maxValue: number
+    minValue?: number,
+    maxValue?: number
   },
   sort?: {
     averageRating: string

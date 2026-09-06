@@ -13,7 +13,9 @@ export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
     handleMaxValueUpdate,
     handleMinValueUpdate,
     handleCategoryToggle,
-    selectedCategories
+    selectedCategories,
+    handleApplyFilter,
+    handleResetFilter
 }) => {
     return(
         <View>
@@ -79,13 +81,16 @@ export const FilterView: FC<ReturnType<typeof useFilterViewModel>> = ({
                     >
                         <AppButton
                             variant="outline"
+                            onPress={handleResetFilter}
                         >Clear Filter</AppButton>
                     </View>
 
                     <View
                         className="flex-1"
                     >
-                        <AppButton>Filter</AppButton>
+                        <AppButton
+                            onPress={handleApplyFilter}
+                        >Filter</AppButton>
                     </View>
                 </View>
             </View>

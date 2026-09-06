@@ -4,8 +4,14 @@ import { colors } from "@/styles/colors"
 import { Ionicons } from "@expo/vector-icons"
 import { Text, TouchableOpacity, View } from "react-native"
 import { Filter } from "../Filter"
+import { FC } from "react"
 
-export const SearchInput = () => {
+interface SearchParams{
+    setSearchInputText: (text: string) => void
+    inputValue: string;
+}
+
+export const SearchInput: FC<SearchParams> = ({ setSearchInputText, inputValue }) => {
     const { open } = useBottomSheetStore()
 
     return(
@@ -14,7 +20,13 @@ export const SearchInput = () => {
 
             <View className="flex-row">
                 <View className="flex-1">
-                    <AppInput leftIcon="search" className="text-lg flex-1" />
+                    <AppInput 
+                        leftIcon="search" 
+                        className="text-lg flex-1"
+                        placeholder="Search"
+                        onChangeText={setSearchInputText}
+                        value={inputValue}
+                    />
                 </View>
 
                 <TouchableOpacity 
