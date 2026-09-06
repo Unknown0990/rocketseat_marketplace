@@ -5,7 +5,7 @@ import { ProductInterface } from "@/shared/interfaces/product"
 import { ProductCard } from "./components/ProductCard"
 import { FC } from "react"
 import { useHomeViewModel } from "./useHome.viewModel"
-import { Footer } from "./components/footer"
+import { Footer } from "./components/Footer"
 import { colors } from "@/styles/colors"
 
 export const HomeView: FC<ReturnType<typeof useHomeViewModel>> = ({ 
