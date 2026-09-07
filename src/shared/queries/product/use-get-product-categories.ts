@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query"
 
 export const useGetProductCategoriesQuery = () => {
     const query = useQuery({
-        queryKey: ["products-categories"],
         queryFn: getProductsCategories,
+        queryKey: ["products-categories"],
         staleTime: 1000 * 60 * 60
     })
 

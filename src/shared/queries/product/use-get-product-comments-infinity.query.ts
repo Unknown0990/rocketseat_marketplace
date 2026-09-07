@@ -1,0 +1,37 @@
+import { BuildImageUrl } from "@/shared/helpers/buildImageUrl"
+import { ProductCommentInterface } from "@/shared/interfaces/http/product-comment"
+import { getProductComments } from "@/shared/services/product.service"
+import { useInfiniteQuery } from "@tanstack/react-query"
+
+export const useGetProductCommentsInfiniteQuery = (productId: number) => {
+    const query = useInfiniteQuery({
+        queryFn: ({ pageParam = 1 }) => getProductComments({
+            productId,
+            pagination: {
+                perPage: 20,
+                page: pageParam
+            }
+        }),
+        queryKey: ["product-comments", productId],
+        getNextPageParam: (lastPage) => {
+            if(lastPage.page < lastPage.totalPages){
+                return lastPage.page + 1
+            }
+
+            return undefined
+        },
+        initialPageParam: 1
+    })
+
+    const comments = query.data?.pages.flatMap(page => page.data).map(comment => ({
+        ...comment,
+        user: {
+            ...comment.user,
+            avatar: {
+                url: BuildImageUrl(comment.user.avatar?.url || "")
+            }
+        }
+    })) as ProductCommentInterface[] ?? []
+
+    return { ...query, comments }
+}

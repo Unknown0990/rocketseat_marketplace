@@ -3,10 +3,15 @@ import { Image, Text, TouchableOpacity, View } from "react-native"
 import { useProductCardViewModel } from "./useProductCard.viewModel"
 import { Ionicons } from "@expo/vector-icons"
 import { colors } from "@/styles/colors"
+import { AppPriceText } from "@/shared/components/AppPriceText"
+import { router } from "expo-router"
 
 export const ProductCardView: FC<ReturnType<typeof useProductCardViewModel>> = ({ product, formatRating }) => {
     return(
-        <TouchableOpacity className="w-[48%] my-1 rounded-xl shadow-sm overflow-hidden height-[157px] p-[4px] bg-white mb-2">
+        <TouchableOpacity 
+            className="w-[48%] my-1 rounded-xl shadow-sm overflow-hidden height-[157px] p-[4px] bg-white mb-2"
+            onPress={() => router.push(`/product/${product.id}`)}
+        >
             <View>
                 <Image
                     source={{ uri: `${product.photo}` }}
@@ -26,7 +31,11 @@ export const ProductCardView: FC<ReturnType<typeof useProductCardViewModel>> = (
                 <Text className="text-xl font-semibold mb-1" numberOfLines={2}>{product.name}</Text>
 
                 <View>
-                    <Text className="flex-row items-center justify-between">R$ {product.value}</Text>
+                    <AppPriceText
+                        classNameCurrency="text-sm text-purple-base"
+                        classNameValue="text-lg flex-1 text-purple-base font-bold"
+                        value={Number(product.value)}
+                    />
                 </View>
             </View>
 
