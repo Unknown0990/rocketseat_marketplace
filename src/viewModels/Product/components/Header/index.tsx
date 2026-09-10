@@ -9,10 +9,12 @@ import { Image, Text, TouchableOpacity, View } from "react-native"
 
 export interface HeaderParams{
     productDetails: GetProductDetailsRequest;
+    handleOpenReview: () => void;
 }
 
 export const Header: FC<HeaderParams> = ({
-    productDetails
+    productDetails,
+    handleOpenReview
 }) => {
     return(
         <View className="pb-5 items-start bg-background">
@@ -91,7 +93,7 @@ export const Header: FC<HeaderParams> = ({
                 <View  className="flex-row justify-between items-center pt-4 border-t border-gray-200">
                     <Text className="text-lg font-bold text-gray-800">Reviews</Text>
 
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={handleOpenReview}>
                         <Text className="text-purple-base text-base font-medium">Leave a review</Text>
                     </TouchableOpacity>
                 </View>

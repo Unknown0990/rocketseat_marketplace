@@ -21,7 +21,9 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
     handleRefetch,
     comments,
     isRefetching,
-    isFetchingNextPage
+    isFetchingNextPage,
+    handleAddToCart,
+    handleOpenReview
 }) => {
     if(error) return <Error />
 
@@ -33,7 +35,7 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
                 className="px-6 flex-1"
                 data={comments}
                 renderItem={({ item }) => <Comment comment={item} />}
-                ListHeaderComponent={<Header productDetails={productDetails}/>}
+                ListHeaderComponent={<Header handleOpenReview={handleOpenReview}  productDetails={productDetails}/>}
                 ListFooterComponent={<ListFooterComponent isLoadingMore={isFetchingNextPage} />}
                 ListEmptyComponent={<ListEmptyListComponent isLoadingComments={getCommentsLoading} />}
                 onEndReached={handleEndReached}
@@ -42,7 +44,10 @@ export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
                 contentContainerClassName="pb-6"
             />
 
-            <AddToCartFooter product={productDetails} />
+            <AddToCartFooter
+                handleAddToCart={handleAddToCart}
+                product={productDetails}
+            />
         </View>
     )
 }

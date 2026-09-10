@@ -6,14 +6,16 @@ import { View } from "react-native"
 
 interface AddToCartFooterParams{
     product: ProductInterface;
+    handleAddToCart: () => void;
 }
 
-export const AddToCartFooter: FC<AddToCartFooterParams> = ({ product }) => {
+export const AddToCartFooter: FC<AddToCartFooterParams> = ({ product, handleAddToCart }) => {
     return(
         <View className="fixed justify-between items-center bg-white bottom-0 right-0 left-0 p-7 h-[96px] flex-row">
             <AppPriceText value={Number(product.value)} />
 
             <AppButton
+                onPress={handleAddToCart}
                 leftIcon="cart"
                 className="w-[120px] h-[40px]"
             >Add</AppButton>
