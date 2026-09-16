@@ -23,7 +23,6 @@ export const useModalStore = create<ModalStore>((set, get) => ({
         transparent: true,
         statusBarTranslucent: false
     },
-
     open: (content: ReactNode, config?: ModalConfig) => set({
         isOpen: true,
         content,

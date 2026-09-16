@@ -21,15 +21,12 @@ export const AppBottomSheet = () => {
         }
     }, [isOpen, content])
 
-    const renderBackdrop = useCallback((props: BottomSheetBackdropProps) => (
-        <BottomSheetBackdrop 
-            appearsOnIndex={0} 
-            disappearsOnIndex={1} 
-            opacity={0.7} 
-            pressBehavior="close"
-            {...props}
-        />
-    ), [])
+    const renderBackdrop = useCallback((props: BottomSheetBackdropProps) => {
+        if(!isOpen) return <></>
+        return(
+            <View className="bg-black/60 w-full h-full absolute z-1"/>
+        )
+    }, [isOpen])
 
     const handleSheetChanges = useCallback((index: number) => {
         if(index === -1){
@@ -54,7 +51,7 @@ export const AppBottomSheet = () => {
             onChange={handleSheetChanges}
         >
             <BottomSheetScrollView>
-                <SafeAreaView>
+                <SafeAreaView edges={['bottom']}>
                     {content}
                 </SafeAreaView>
             </BottomSheetScrollView>

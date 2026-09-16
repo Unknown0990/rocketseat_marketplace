@@ -1,12 +1,8 @@
-import { useUserStore } from "@/shared/store/user-store";
-import { Text, TouchableOpacity, View } from "react-native";
+import { CartView } from "@/viewModels/Cart/Cart.view"
+import { useCartViewModel } from "@/viewModels/Cart/useCart.viewModel"
 
 export default function Cart(){
-    const { logout } = useUserStore()
+    const viewModel = useCartViewModel()
 
-    return(
-        <View className='flex-1 items-center justify-center'>
-            <Text>Cart</Text>
-        </View>
-    )
+    return <CartView {...viewModel} />
 }

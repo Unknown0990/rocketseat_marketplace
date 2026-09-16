@@ -28,7 +28,6 @@ export const AddToCartSuccessModal: FC<AddToCartSuccessModalParams> = ({ onClose
 
             <View className="gap-3">
                 <AppButton
-                    leftIcon="cart"
                     onPress={onGoToCart}
                 >Go to Cart</AppButton>
 

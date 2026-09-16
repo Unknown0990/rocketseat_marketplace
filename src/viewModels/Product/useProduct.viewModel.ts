@@ -6,7 +6,8 @@ import { createElement } from "react"
 import { AddToCartSuccessModal } from "./components/AddToCartSuccessModal"
 import { router } from "expo-router"
 import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
-import { ReviewBottomSheet } from "./components/AddToCartFooter/ReviewBottomSheet"
+import { ReviewBottomSheet } from "./components/ReviewBottomSheet"
+import { View } from "react-native"
 
 export const useProductViewModel = (productId: number) => {
     const { data: productDetails, isLoading, error } = useGetProductDetailsQuery(productId)

@@ -1,3 +1,4 @@
+import { baseURL } from "@/shared/api/marketplace"
 import { BuildImageUrl } from "@/shared/helpers/buildImageUrl"
 import { ProductCommentInterface } from "@/shared/interfaces/http/product-comment"
 import { getProductComments } from "@/shared/services/product.service"
@@ -28,7 +29,7 @@ export const useGetProductCommentsInfiniteQuery = (productId: number) => {
         user: {
             ...comment.user,
             avatar: {
-                url: BuildImageUrl(comment.user.avatar?.url || "")
+                url: comment.user.avatar?.url ? `${baseURL}${comment.user.avatar.url}` : undefined
             }
         }
     })) as ProductCommentInterface[] ?? []

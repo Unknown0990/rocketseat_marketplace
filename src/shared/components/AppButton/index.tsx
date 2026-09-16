@@ -20,8 +20,10 @@ export const AppButton: FC<AppButtonProps> = ({ leftIcon, rightIcon, children, v
 
         return(
             <>
-                {leftIcon && <Ionicons name={leftIcon} color={contentColor} size={20} />}
+                {leftIcon && <Ionicons name={leftIcon} color={contentColor} size={20} className="mr-2" />}
+
                 <Text className={styles.text()}>{children}</Text>
+
                 {rightIcon && <Ionicons name={rightIcon} color={contentColor} size={20} />}
             </>
         )

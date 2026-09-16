@@ -1,0 +1,21 @@
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
+import { useCartStore } from "@/shared/store/cart-store"
+import { createElement } from "react"
+import { AddCardBottomSheet } from "./Components/AddCardBottomSheet"
+
+export const useCartViewModel = () => {
+    const { products } = useCartStore()
+
+    const { open: openBottomSheet } = useBottomSheetStore()
+
+    const openCartBottomSheet = () => {
+        openBottomSheet({
+            content: createElement(AddCardBottomSheet)
+        })
+    }
+
+    return{
+        products,
+        openCartBottomSheet
+    }
+}

@@ -7,8 +7,6 @@ import { ListFooterComponent } from "./components/ListFooterComponent"
 import { ListEmptyListComponent } from "./components/ListEmptyListComponent"
 import { Loading } from "./components/Loading"
 import { Error } from "./components/Error"
-import { GetProductDetailsRequest } from "@/shared/interfaces/http/product-details"
-import { SafeAreaView } from "react-native-safe-area-context"
 import { AddToCartFooter } from "./components/AddToCartFooter"
 
 export const ProductView: FC<ReturnType<typeof useProductViewModel>> = ({
