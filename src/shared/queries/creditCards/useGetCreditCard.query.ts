@@ -1,7 +1,7 @@
 import { getCreditCards } from "@/shared/services/credit-card.service"
 import { useQuery } from "@tanstack/react-query"
 
-export const useGetCreditCard = () => {
+export const useGetCreditCardQuery = () => {
     const query = useQuery({
         queryFn: getCreditCards,
         queryKey: ['credit-cards'],

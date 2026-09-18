@@ -5,8 +5,9 @@ import { Ionicons } from "@expo/vector-icons"
 import { colors } from "@/styles/colors"
 import { AppInput } from "@/shared/components/AppInput"
 import { AppButton } from "@/shared/components/AppButton"
+import { InputController } from "@/shared/components/InputController"
 
-export const AddCardBottomSheetView: FC<ReturnType<typeof useAddCardBottomSheetViewModel>> = ({}) => {
+export const AddCardBottomSheetView: FC<ReturnType<typeof useAddCardBottomSheetViewModel>> = ({ control, handleCreateCreditCard, expirationDateMask, cardNumberMask }) => {
     return(
         <ScrollView className="flex-1">
             <View className="p-8">
@@ -19,25 +20,42 @@ export const AddCardBottomSheetView: FC<ReturnType<typeof useAddCardBottomSheetV
                 </View>
 
                 <View className="mt-6 gap-4">
-                    <AppInput
+                    <InputController
+                        control={control}
+                        name="titularName"
                         leftIcon="person-outline"
                         label="CARDHOLDER NAME"
                         placeholder="Your full name"
                     />
 
+                    <InputController
+                        control={control}
+                        name="number"
+                        leftIcon="card-outline"
+                        label="CARD NUMBER"
+                        placeholder="Your card number"
+                        mask={cardNumberMask}
+                        maxLength={19}
+                    />
+
                     <View className="flex-row gap-2">
                         <View className="flex-1">
-                            <AppInput
+                            <InputController
+                                control={control}
+                                name='expirationDate'
                                 leftIcon="calendar-outline"
-                                label="DATE"
+                                label="EXPIRATION DATE"
                                 placeholder="MM/AA"
                                 keyboardType="numeric"
                                 maxLength={5}
+                                mask={expirationDateMask}
                             />
                         </View>
 
                         <View className="flex-1">
-                            <AppInput
+                            <InputController
+                                control={control}
+                                name='CVV'
                                 leftIcon="lock-closed-outline"
                                 label="CVV"
                                 placeholder="123"

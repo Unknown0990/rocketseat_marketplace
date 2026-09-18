@@ -5,7 +5,7 @@ interface InputControllerProps<T extends FieldValues> extends Omit<InputProps, "
     control: Control<T>;
     name: Path<T>;
     errors?: FieldErrors<T>;
-    render: () => void;
+    render?: () => void;
 }
 
 export const InputController = <T extends FieldValues> ({
