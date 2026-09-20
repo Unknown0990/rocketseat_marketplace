@@ -3,7 +3,7 @@ import { CreditCardInterface } from "@/shared/interfaces/credit-card"
 import { CartFooterView } from "./CartFooter.view";
 import { useCartFooterViewModel } from "./useCartFooter.viewModel";
 
-interface CartFooterParams{
+export interface CartFooterParams{
     openCartBottomSheet: () => void;
     creditCards: CreditCardInterface[]
     loadingCreditCards: boolean;
@@ -12,5 +12,5 @@ interface CartFooterParams{
 export const CartFooter: FC<CartFooterParams> = ({ openCartBottomSheet, creditCards, loadingCreditCards }) => {
     const viewModel = useCartFooterViewModel()
 
-    return <CartFooterView {...viewModel} />
+    return <CartFooterView {...viewModel} creditCards={creditCards} loadingCreditCards={loadingCreditCards} openCartBottomSheet={openCartBottomSheet}/>
 }

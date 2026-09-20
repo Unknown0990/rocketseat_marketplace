@@ -8,10 +8,18 @@ import { useCreditCardViewModel } from "./useCreditCard.viewModel";
 
 interface CreditCardComponentParams{
     creditCard: CreditCardInterface;
+    isSelected: boolean;
+    setSelectedCard: (card: CreditCardInterface) => void;
 }
 
-export const CreditCard: FC<CreditCardComponentParams> = ({ creditCard }) => {
+export const CreditCard: FC<CreditCardComponentParams> = ({ creditCard, isSelected, setSelectedCard }) => {
     const viewModel = useCreditCardViewModel(creditCard)
 
-    return <CreditCardView {...viewModel} />
+    return(
+        <CreditCardView 
+            {...viewModel}
+            isSelected={isSelected}
+            setSelectedCard={setSelectedCard}
+        />
+    )
 }

@@ -7,10 +7,18 @@ import { ActivityIndicator, FlatList, Text, TouchableOpacity, View } from "react
 import { CreditCard } from "../CreditCard"
 import { FC } from "react"
 import { useCartFooterViewModel } from "./useCartFooter.viewModel";
+import { CartFooterParams } from "."
 
-export const CartFooterView: FC<ReturnType<typeof useCartFooterViewModel>> = ({  }) => {
-    const { total } = useCartStore()
-
+export const CartFooterView: FC<ReturnType<typeof useCartFooterViewModel> & CartFooterParams> = ({
+    creditCards,
+    loadingCreditCards,
+    openCartBottomSheet,
+    total,
+    selectCard,
+    setSelectCard,
+    isOrderLoading,
+    submitOrder
+}) => {
     return(
         <View className="bg-white p-4 rounded-lg mt-6">
             <View className="flex-row justify-between items-center mb-4">
@@ -42,7 +50,7 @@ export const CartFooterView: FC<ReturnType<typeof useCartFooterViewModel>> = ({ 
                 :
                 <FlatList
                     data={creditCards}
-                    renderItem={({ item }) => <CreditCard creditCard={item}/>}
+                    renderItem={({ item: creditCard }) => <CreditCard creditCard={creditCard} isSelected={creditCard.id === selectCard?.id} setSelectedCard={setSelectCard} />}
                     className="gap-2"
                 />
             }
@@ -50,6 +58,8 @@ export const CartFooterView: FC<ReturnType<typeof useCartFooterViewModel>> = ({ 
 
             <AppButton
                 className="mt-4"
+                onPress={submitOrder}
+                isLoading={isOrderLoading}
             >Confirm Purchase</AppButton>
         </View>
     )
