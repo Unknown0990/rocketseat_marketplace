@@ -60,6 +60,7 @@ export const AddCardBottomSheetView: FC<ReturnType<typeof useAddCardBottomSheetV
                                 label="CVV"
                                 placeholder="123"
                                 keyboardType="numeric"
+                                maxLength={3}
                             />
                         </View>
                     </View>
@@ -75,6 +76,7 @@ export const AddCardBottomSheetView: FC<ReturnType<typeof useAddCardBottomSheetV
 
                     <View className="flex-1">
                         <AppButton
+                            onPress={handleCreateCreditCard}
                         >Add</AppButton>
                     </View>
                 </View>

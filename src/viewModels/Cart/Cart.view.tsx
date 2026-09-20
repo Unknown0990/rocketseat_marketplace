@@ -13,7 +13,7 @@ export const CartView: FC<ReturnType<typeof useCartViewModel>> = ({
     loadingCreditCards
 }) => {
     return(
-        <View>
+        <View className="flex-1">
             <FlatList
                 contentContainerClassName="px-6"
                 className="py-2"

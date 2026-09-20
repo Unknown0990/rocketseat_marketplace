@@ -2,11 +2,34 @@ import { useCreateCreditCardMutation } from "@/shared/queries/creditCards/useCre
 import { useForm } from "react-hook-form"
 import { CreditCardFormData, creditCardSchema } from "./credit-card.schema"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
+
+const formatDate = (dateString: string, setError: (message: string) => void): string => {
+    const [month, year] = dateString.split("/").map(Number)
+
+    if(month < 1 || month > 12){
+        setError("Invalid month")
+        throw new Error("Invalid month")
+    }
+
+    if(year < 0 || month > 99){
+        setError("Invalid year")
+        throw new Error("Invalid year")
+    }
+    
+    const fullYear = 2000 + year;
+
+    const expirationDate = new Date(fullYear, month, 0).toISOString().split("T")[0]
+    
+    return expirationDate
+}
 
 export const useAddCardBottomSheetViewModel = () => {
     const createCreditCardMutation = useCreateCreditCardMutation()
 
-    const { control, handleSubmit, reset, watch, clearErrors } = useForm<CreditCardFormData>({
+    const { close: closeBottomSheet } = useBottomSheetStore()
+
+    const { control, handleSubmit, reset, watch, clearErrors, setError } = useForm<CreditCardFormData>({
         resolver: yupResolver(creditCardSchema),
         defaultValues: {
             titularName: "",
@@ -16,13 +39,20 @@ export const useAddCardBottomSheetViewModel = () => {
         }
     })
 
-    const handleCreateCreditCard = () => {
-        createCreditCardMutation.mutate({
-            CVV: 0,
-            expirationDate: "",
-            number: ""
+    const handleCreateCreditCard = handleSubmit(async ({ CVV, expirationDate, number }) => {
+
+        const expDate = formatDate(expirationDate, (message) => setError("expirationDate", { message }))
+
+        const noSpaceNumber = number.replace(/\s/g, "")
+
+        await createCreditCardMutation.mutateAsync({
+            CVV: Number(CVV),
+            expirationDate: expDate,
+            number: noSpaceNumber
         })
-    }
+
+        closeBottomSheet()
+    })
 
     const expirationDateMask = (value: string) => {
         const cleaned = value.replace(/\D/g, "")
