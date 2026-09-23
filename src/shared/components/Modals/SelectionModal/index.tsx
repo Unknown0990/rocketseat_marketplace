@@ -25,11 +25,11 @@ export const SelectionModal: FC<SelectionModalProps> = ({ title, message, option
                 <Text className="text-lg font-bold text-gray-900 mb-3">{title}</Text>
 
                 {message && 
-                    <Text className="text-base text=gray-600 mb-6 leading-6">{message}</Text>
+                    <Text className="text-base text=gray-600 mb-6 leading-6 text-center">{message}</Text>
                 }
             </View>
 
-            <View className="gap-3">
+            <View className="my-1">
                 {options.map((option) => (
                     <TouchableOpacity 
                         className={getButtonClass(option.variant ?? 'primary')}

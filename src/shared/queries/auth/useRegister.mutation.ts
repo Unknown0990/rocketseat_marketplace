@@ -2,6 +2,7 @@ import { useMutation } from "@tanstack/react-query"
 import * as authService from '../../services/auths.service'
 import { RegisterHTTPParams } from "@/shared/interfaces/http/register"
 import { useUserStore } from "@/shared/store/user-store";
+import { Toast } from "toastify-react-native";
 
 interface UserRegisterMutationParams{
     onSuccess?: () => void;
@@ -24,7 +25,10 @@ export const useRegisterMutation = ({ onSuccess }: UserRegisterMutationParams = 
 
             onSuccess?.()
         },
-        onError: (error) => console.log(error),
+        onError: (error) => {
+            Toast.error(error?.message ?? "Not possible to register. Try again later")
+            console.log(error)
+        },
     })
 
     return mutation
