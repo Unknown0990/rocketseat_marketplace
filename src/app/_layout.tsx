@@ -6,10 +6,13 @@ import ToastManager from 'toastify-react-native'
 import { SafeAreaView } from "react-native-safe-area-context"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { AppBottomSheet } from "@/shared/components/AppBottomSheet"
+import { useNotifications } from "@/shared/hooks/useNotifications"
 
 const queryClient = new QueryClient()
 
 export default function RootLayout(){
+    useNotifications()
+
     return(
         <GestureHandlerRootView className="flex-1">
             <SafeAreaView className="flex-1 bg-purple-base">

@@ -1,6 +1,7 @@
 import { useAppModal } from "@/shared/hooks/useAppModal"
 import { CreditCardInterface } from "@/shared/interfaces/credit-card"
 import { useSubmitOrderMutation } from "@/shared/queries/orders/use-submit-order.mutation"
+import { localNotificationsService, NOTIFICATION_IDS } from "@/shared/services/local-notifications.service"
 import { useCartStore } from "@/shared/store/cart-store"
 import { router } from "expo-router"
 import { useState } from "react"
@@ -21,6 +22,18 @@ export const useCartFooterViewModel = () => {
             creditCardId: selectCard?.id,
             items: products.map(({ id, quantity }) => ({ productId: id, quantity }))
         })
+
+        const firstProduct = products[0]
+
+        if(firstProduct){
+            localNotificationsService.cancelNotifications(`${localNotificationsService.NOTIFICATION_IDS.CART_REMINDER}-${firstProduct.id}`)
+
+            await localNotificationsService.scheduleFeedbackNotification({
+                delayInMinutes: 10,
+                productId: firstProduct.id,
+                productName: firstProduct.name
+            })
+        }
         
         clearCart()
 
@@ -32,7 +45,6 @@ export const useCartFooterViewModel = () => {
                 router.push("/(private)/(tabs)/orders")
             },
         })
-        
     }
 
     return{

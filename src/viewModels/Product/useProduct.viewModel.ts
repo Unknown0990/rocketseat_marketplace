@@ -2,14 +2,15 @@ import { useGetProductCommentsInfiniteQuery } from "@/shared/queries/product/use
 import { useGetProductDetailsQuery } from "@/shared/queries/product/use-get-product-details"
 import { useCartStore } from "@/shared/store/cart-store"
 import { useModalStore } from "@/shared/store/modal-store"
-import { createElement } from "react"
+import { createElement, useEffect } from "react"
 import { AddToCartSuccessModal } from "./components/AddToCartSuccessModal"
 import { router } from "expo-router"
 import { useBottomSheetStore } from "@/shared/store/bottom-sheet-store"
 import { ReviewBottomSheet } from "./components/ReviewBottomSheet"
 import { View } from "react-native"
+import { localNotificationsService } from "@/shared/services/local-notifications.service"
 
-export const useProductViewModel = (productId: number) => {
+export const useProductViewModel = (productId: number, openFeedbackBottomsheet: boolean) => {
     const { data: productDetails, isLoading, error } = useGetProductDetailsQuery(productId)
 
     const { 
@@ -49,7 +50,7 @@ export const useProductViewModel = (productId: number) => {
         close()
     }
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
         if(!productDetails) return
 
         addProduct({
@@ -57,6 +58,12 @@ export const useProductViewModel = (productId: number) => {
             name: productDetails.name,
             price: productDetails.value,
             image: productDetails.photo,
+        })
+
+        await localNotificationsService.scheduleCartReminder({
+            delayInMinutes: 20,
+            productId: productDetails.id,
+            productName: productDetails.name,
         })
 
         open(createElement(AddToCartSuccessModal, {
@@ -77,6 +84,12 @@ export const useProductViewModel = (productId: number) => {
         })
     }
 
+    useEffect(() => {
+      if(openFeedbackBottomsheet){
+        handleOpenReview()
+      }
+    }, [openFeedbackBottomsheet, productDetails])
+    
     return{
         productDetails,
         isLoading,

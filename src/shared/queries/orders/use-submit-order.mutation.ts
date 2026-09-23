@@ -11,7 +11,6 @@ export const useSubmitOrderMutation = () => {
             queryClient.invalidateQueries({
                 queryKey: ['user-orders']
             })
-            console.log(response.message)
         },
         onError: (error) => {
             Toast.error(error.message ?? "Failed to make an order", "top")

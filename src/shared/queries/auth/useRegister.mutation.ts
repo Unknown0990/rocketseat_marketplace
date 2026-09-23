@@ -15,8 +15,6 @@ export const useRegisterMutation = ({ onSuccess }: UserRegisterMutationParams = 
         mutationFn
         : (userData: RegisterHTTPParams) => authService.register(userData),
         onSuccess: (response) => {
-            console.log(response)
-
             setSession({
                 user: response.user,
                 token: response.token,

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Marketplace",
     "slug": "Marketplace",
-    "scheme": "Marketplace",
+    "scheme": "marketplace",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -35,6 +35,15 @@
         {
           "photospermission": "This app needs your access to your gallery",
           "cameraPermission": "This app needs your access to your camera to execute es"
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/splash-icon.png",
+          "color": "#ffffff",
+          "defaultChannel": "default",
+          "enableBackgroundRemoteNotifications": false
         }
       ]
     ],
