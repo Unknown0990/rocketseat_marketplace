@@ -7,11 +7,13 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { AppBottomSheet } from "@/shared/components/AppBottomSheet"
 import { useNotifications } from "@/shared/hooks/useNotifications"
+import { useOneSignal } from "@/shared/hooks/useOneSignal"
 
 const queryClient = new QueryClient()
 
 export default function RootLayout(){
     useNotifications()
+    useOneSignal()
 
     return(
         <GestureHandlerRootView className="flex-1">

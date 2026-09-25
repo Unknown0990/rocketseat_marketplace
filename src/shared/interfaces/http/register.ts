@@ -6,4 +6,5 @@ export interface RegisterHTTPParams{
   avatarUrl?: string;
   phone: string;
   password: string;
+  notificationToken?: string;
 }

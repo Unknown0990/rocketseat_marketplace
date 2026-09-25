@@ -11,11 +11,14 @@ import { Alert } from 'react-native';
 import { useState } from 'react';
 import { CameraType } from 'expo-image-picker';
 import { useUploadAvatarMutation } from '@/shared/queries/auth/use-upload-avatar.mutation';
+import { useOneSignal } from '@/shared/hooks/useOneSignal';
 
 export const useRegisterViewModel = () => {
     const [avatarURI, setAvatarURI] = useState<string | null>(null)
 
     const { updateUser } = useUserStore()
+
+    const { playerId } = useOneSignal()
 
     const { handleSelectImage } = useImage({
         callback: setAvatarURI,
@@ -54,7 +57,10 @@ export const useRegisterViewModel = () => {
     const onSubmit = handleSubmit(async (userData) => {
         const { confirmPassword, ...registerData } = userData
 
-        await userRegisterMutation.mutateAsync(registerData)
+        await userRegisterMutation.mutateAsync({
+            ...registerData,
+            notificationToken: playerId,
+        })
     })
     
     return {

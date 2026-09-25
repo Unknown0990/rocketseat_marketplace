@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1068107703259",
+    "project_id": "marketplace-a3898",
+    "storage_bucket": "marketplace-a3898.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1068107703259:android:5b9d4e9521929b8f98fdfe",
+        "android_client_info": {
+          "package_name": "com.itsdevx.marketplacerocketseatmobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUIabhEq-XuwP8ezgksOcde299DsXpqpE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
