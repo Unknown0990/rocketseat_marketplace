@@ -6,6 +6,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { FC } from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native"
+import { FavoriteButton } from "./components/FavoriteButton";
 
 export interface HeaderParams{
     productDetails: GetProductDetailsRequest;
@@ -18,13 +19,17 @@ export const Header: FC<HeaderParams> = ({
 }) => {
     return(
         <View className="pb-5 items-start bg-background">
-            <TouchableOpacity
-                className="w-full justify-start items-center flex-row gap-3"
-                onPress={() => router.back()}
-            >
-                <Ionicons name='arrow-back' size={24} color={colors["purple-base"]}/>
-                <Text className="text-base text-purple-base py-3">Go Back</Text>
-            </TouchableOpacity>
+            <View className="w-full flex-row justify-between items-center">
+                <TouchableOpacity
+                    className="justify-start items-center flex-row gap-3"
+                    onPress={() => router.back()}
+                >
+                    <Ionicons name='arrow-back' size={24} color={colors["purple-base"]}/>
+                    <Text className="text-base text-purple-base py-3">Go Back</Text>
+                </TouchableOpacity>
+
+                <FavoriteButton productId={productDetails.id} />
+            </View>
 
             <View className="w-full rounded-lg shadow-gray-500/30 bg-white">
                 <Image
