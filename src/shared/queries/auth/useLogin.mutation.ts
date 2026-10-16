@@ -8,8 +8,7 @@ export const useLoginMutation = () => {
     const { setSession } = useUserStore()
 
     const mutation = useMutation({
-        mutationFn
-        : (userData: LoginHTTPParams) => authService.login(userData),
+        mutationFn: (userData: LoginHTTPParams) => authService.login(userData),
         onSuccess: (response) => {
             setSession(response)
         },

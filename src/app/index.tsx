@@ -9,7 +9,7 @@ export default function App(){
     //     name: "Username",
     // }
 
-    if(user && token) return <Redirect href="/(private)/home" />
+    if(user && token) return <Redirect href="/(private)/(tabs)/home" />
 
     return(
         <Redirect href="/(public)/login" />

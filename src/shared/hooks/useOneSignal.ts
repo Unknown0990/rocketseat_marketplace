@@ -1,21 +1,19 @@
 import { useEffect, useState } from "react"
-import { OneSignal } from 'react-native-onesignal'
+import { NotificationClickEvent, OneSignal } from 'react-native-onesignal'
 
 const ONESIGNAL_APP_ID = process.env.EXPO_PUBLIC_ONESIGNAL_APP_ID
 
 export const useOneSignal = () => {
-    const [playerId, setPlayerId] = useState<string | undefined>()
+    const [playerId, setPlayerId] = useState<string | null | undefined>()
 
     useEffect(() => {
         if(!ONESIGNAL_APP_ID) return
 
-        OneSignal.initialize(ONESIGNAL_APP_ID);
-
         (async() => {
-            const playerID = await OneSignal.User.pushSubscription.getIdAsync()
+            const id = await OneSignal.User.pushSubscription.getIdAsync()
 
-            if(playerId){
-                setPlayerId(playerID)
+            if(id){
+                setPlayerId(id)
             }
         })()
     }, [])
